@@ -14,4 +14,7 @@ public interface EmployeeService {
 
     Collection<Employee> findAll();
 
+    void resetMapForTest();
+
+
 }

@@ -2,6 +2,7 @@ package pro.sky.skyproMockhw2_12.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pro.sky.skyproMockhw2_12.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproMockhw2_12.model.Employee;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartmentId() == departmentId)
                 .min(Comparator.comparingInt(employee -> employee.getSalary()))
-                .orElseThrow(() -> new NoSuchElementException("Not found employee"));
+                .orElseThrow(() -> new EmployeeNotFoundException("Not found employee"));
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartmentId() == departmentId)
                 .max(Comparator.comparingInt(Employee::getSalary))
-                .orElseThrow(() -> new NoSuchElementException("Not found employee"));
+                .orElseThrow(() -> new EmployeeNotFoundException("Not found employee"));
     }
 
     @Override
@@ -54,4 +55,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         return employeeService.findAll().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartmentId));
     }
+
+    
 }

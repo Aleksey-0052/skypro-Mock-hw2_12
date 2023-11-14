@@ -34,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         employees.put(employee.getFullName(), employee);
-        return employee;
+        return employees.get(employee.getFullName());
     }
 
     @Override
@@ -48,8 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         }
 
-        employees.remove(employee.getFullName());
-        return employees.get(employee.getFullName());
+        return employees.remove(employee.getFullName());
     }
 
     @Override
@@ -76,4 +75,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new InvalidInputException("Имя или фамилия сотрудника содержат недопустимые символы");
         }
     }
+
+    @Override
+    public void resetMapForTest() {
+
+        this.employees.clear();
+    }
+    
 }
