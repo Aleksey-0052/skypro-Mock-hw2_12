@@ -72,8 +72,8 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
 
-        //Mockito.when(employeeService.findAll(any()))
-                //.thenThrow(EmployeeNotFoundException.class);
+        Mockito.when(employeeService.findAll(any()))
+                .thenThrow(EmployeeNotFoundException.class);
 
         assertThrows(EmployeeNotFoundException.class,
                 () -> departmentService.findEmployeeWithMinSalaryByDepartment(1));
@@ -111,8 +111,8 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
 
-        //Mockito.when(employeeService.findAll(any()))
-        //.thenThrow(EmployeeNotFoundException.class);
+        Mockito.when(employeeService.findAll(any()))
+        .thenThrow(EmployeeNotFoundException.class);
 
 
         assertThrows(EmployeeNotFoundException.class,
