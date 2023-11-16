@@ -72,11 +72,11 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
 
-        Mockito.when(employeeService.findAll(any()))
-                .thenThrow(EmployeeNotFoundException.class);
+        Mockito.when(employeeService.findAll())
+                .thenReturn(expected);
 
         assertThrows(EmployeeNotFoundException.class,
-                () -> departmentService.findEmployeeWithMinSalaryByDepartment(1));
+                () -> departmentService.findEmployeeWithMinSalaryByDepartment(5));
 
     }
     
@@ -111,14 +111,14 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
 
-        Mockito.when(employeeService.findAll(any()))
-        .thenThrow(EmployeeNotFoundException.class);
-
+        Mockito.when(employeeService.findAll())
+                .thenReturn(expected);
 
         assertThrows(EmployeeNotFoundException.class,
-                () -> departmentService.findEmployeeWithMaxSalaryByDepartment(2));
+                () -> departmentService.findEmployeeWithMaxSalaryByDepartment(3));
 
     }
+
     @Test
     public void testCalculateTotalSalaryByDepartment_Success() {
 
@@ -147,12 +147,12 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
 
-        List<Employee> expected1 = Arrays.asList(employee1);
-        List<Employee> expected2 = Arrays.asList(employee2);
-        List<Employee> expected3 = Arrays.asList(employee3);
+        List<Employee> expected1 = List.of(employee1);
+        List<Employee> expected2 = List.of(employee2);
+        List<Employee> expected3 = List.of(employee3);
 
         Mockito.when(employeeService.findAll())
-                .thenReturn(Arrays.asList(employee1, employee2, employee3));
+                .thenReturn(List.of(employee1, employee2, employee3));
 
         Map<Integer, List<Employee>> expected = Map.of(1, expected1, 2, expected2, 3, expected3);
 
@@ -172,7 +172,7 @@ class DepartmentServiceImplTest {
         Employee employee2 = new Employee("Петр", "Петров", 60000, departmentId);
         Employee employee3 = new Employee("Борис", "Борисов", 70000, departmentId);
 
-        List<Employee> expected = Arrays.asList(employee1, employee2, employee3);
+        List<Employee> expected = List.of(employee1, employee2, employee3);
 
         Mockito.when(employeeService.findAll())
                 .thenReturn(expected);
