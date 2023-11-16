@@ -67,16 +67,17 @@ class DepartmentServiceImplTest {
     @Test
     public void testFindEmployeeWithMinSalaryByDepartment_EmployeeNotFoundException() {
 
-        List<Employee> expected = new ArrayList<>();
-        Employee employee1 = new Employee("Иван", "Иванов", 50000, 2);
-        Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
-        Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
+        List<Employee> expected = List.of(
+                 new Employee("Иван", "Иванов", 50000, 2),
+                 new Employee("Петр", "Петров", 60000, 2),
+                 new Employee("Борис", "Борисов", 70000, 3)
+        );
 
         Mockito.when(employeeService.findAll())
                 .thenReturn(expected);
 
         assertThrows(EmployeeNotFoundException.class,
-                () -> departmentService.findEmployeeWithMinSalaryByDepartment(5));
+                () -> departmentService.findEmployeeWithMinSalaryByDepartment(2));
 
     }
     
@@ -106,16 +107,17 @@ class DepartmentServiceImplTest {
     @Test
     public void testFindEmployeeWithMaxSalaryByDepartment_EmployeeNotFoundException() {
 
-        List<Employee> expected = new ArrayList<>();
-        Employee employee1 = new Employee("Иван", "Иванов", 50000, 2);
-        Employee employee2 = new Employee("Петр", "Петров", 60000, 2);
-        Employee employee3 = new Employee("Борис", "Борисов", 70000, 3);
+        List<Employee> expected = Arrays.asList(
+                new Employee("Иван", "Иванов", 50000, 2),
+                new Employee("Петр", "Петров", 60000, 2),
+                new Employee("Борис", "Борисов", 70000, 3)
+        );
 
         Mockito.when(employeeService.findAll())
                 .thenReturn(expected);
 
         assertThrows(EmployeeNotFoundException.class,
-                () -> departmentService.findEmployeeWithMaxSalaryByDepartment(3));
+                () -> departmentService.findEmployeeWithMaxSalaryByDepartment(1));
 
     }
 
